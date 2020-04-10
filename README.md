@@ -338,6 +338,10 @@ RETURN
 WHERE empno=biao2.empno);
 ```
 4 建立一个新用户，账号为自己的姓名拼音，密码为自己的学号；
+```SQL
+create user 'liuhao'
+identified by '17061519';
+```
 
 4.1 将表1的SELECT, INSERT, UPDATE(ename)权限赋给该账号。
 
