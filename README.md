@@ -255,6 +255,15 @@ select*from tu1；
 | liuhao |     NULL |
 +--------+----------+
 ```
+```SQL
+select ename,salalr+comm,count(ename) '14',avg
+(salalr+comm) '平均收入' from t_dept2;
++-------+-------------+----+--------------+
+| ename | salalr+comm | 14 | 平均收入     |
++-------+-------------+----+--------------+
+| SMITH |        NULL | 14 |    1950.0000 |
++-------+-------------+----+--------------+
+```
 3.6 显示每个人的下属, 没有下属的显示 NULL。本操作使用关系代数中哪几种运算？
 ```SQL
 select*from(t_dept2 t1 inner join t_dept2 t2 on t1. mgr=t2.empno)
