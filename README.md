@@ -19,6 +19,12 @@
 ```SQL
 select current_timestamp,
 current_timestamp();
++---------------------+---------------------+
+| current_timestamp   | current_timestamp() |
++---------------------+---------------------+
+| 2020-04-10 08:08:34 | 2020-04-10 08:08:34 |
++---------------------+---------------------+
+1 row in set (0.00 sec)
 ```
 
 2 组合打印自己的姓名和学号
@@ -26,6 +32,11 @@ current_timestamp();
 (例如 张三+123456 或者 zhangsan+123456 显示需包含加号)，写出SQL语句和结果
 ```SQL
 select concat("刘浩+",17061519);
++----------------------------+
+| concat("刘浩+",17061519)   |
++----------------------------+
+| 刘浩+17061519              |
++----------------------------+
 ```
 
 3 建立如下表1和表2，写出建表语句和插入语句。
@@ -35,12 +46,27 @@ deptno int primary key,
 dname varchar(20),
 loc varchar(20)
 );
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| deptno | int(11)     | NO   | PRI | NULL    |       |
+| dname  | varchar(20) | YES  |     | NULL    |       |
+| loc    | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
 insert into t_dept1(deptno,dname,loc)
 values(10, "ACCOUNTING", "NEW YORK"),
 (20, "RESEARCH", "DALLAS"),
 (30, "SALES", "CHICAGO"),
 (40, "OPERATIONS", "BOSTON");
 select*from t_dept1;
++--------+------------+----------+
+| deptno | dname      | loc      |
++--------+------------+----------+
+|     10 | ACCOUNTING | NEW YORK |
+|     20 | RESEARCH   | DALLAS   |
+|     30 | SALES      | CHICAGO  |
+|     40 | OPERATIONS | BOSTON   |
++--------+------------+----------+
 ```
 表1：其中deptno为主键,
 ```
@@ -61,6 +87,18 @@ sal int,
 comm int,
 deptno int
 );
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| empno    | int(11)     | NO   | PRI | NULL    |       |
+| ename    | varchar(20) | YES  |     | NULL    |       |
+| job      | varchar(20) | YES  |     | NULL    |       |
+| mgr      | int(11)     | YES  |     | NULL    |       |
+| hiredate | varchar(40) | YES  |     | NULL    |       |
+| sal      | int(11)     | YES  |     | NULL    |       |
+| comm     | int(11)     | YES  |     | NULL    |       |
+| deptno   | int(11)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
 insert into t_dept2(empno, ename,job,MGR,Hiredate,sal,comm, deptno)
 values(7369, "SMITH", "CLERK", 7902, "1981-03-12", 800.00, NULL, 20),
 (7499, "ALLEN", "SALESMAN", 7698, "1982-03-12", 1600, 300, 30),
@@ -76,6 +114,23 @@ values(7369, "SMITH", "CLERK", 7902, "1981-03-12", 800.00, NULL, 20),
 (7902, "FORD", "ANALYST", 7566, "1981-03-12", 3000, NULL, 20),
 (7934, "MILLER", "CLERK", 7782, "1981-03-12", 1300, NULL, 10)
 ;
++----------+--------+-----------+------+------------+------+------+--------+
+| empno    | ename  | job       | mgr  | hiredate   | sal  | comm | deptno |
++----------+--------+-----------+------+------------+------+------+--------+
+|     7369 | SMITH  | CLERK     | 7902 | 1981-03-12 |  800 | NULL |     20 |
+|     7499 | ALLEN  | SALESMAN  | 7698 | 1982-03-12 | 1600 |  300 |     30 |
+|     7521 | WARD   | SALESMAN  | 7698 | 1838-03-12 | 1250 |  500 |     30 |
+|     7566 | JONES  | MANAGER   | 7839 | 1981-03-12 | 2975 | NULL |     20 |
+|     7654 | MARTIN | SALESMAN  | 7698 | 1981-01-12 | 1250 | 1400 |     30 |
+|     7698 | BLAKE  | MANAGER   | 7839 | 1985-03-12 | 2450 | NULL |     10 |
+|     7788 | SCOTT  | ANALYST   | 7566 | 1981-03-12 | 3000 | NULL |     20 |
+|     7839 | KING   | PRESIDENT | NULL | 1981-03-12 | 5000 | NULL |     10 |
+|     7844 | TURNER | SALESMAN  | 7689 | 1981-03-12 | 1500 |    0 |     30 |
+|     7878 | ADAMS  | CLERK     | 7788 | 1981-03-12 | 1100 | NULL |     20 |
+|     7900 | JAMES  | CLERK     | 7698 | 1981-03-12 |  950 | NULL |     30 |
+|     7902 | FORD   | ANALYST   | 7566 | 1981-03-12 | 3000 | NULL |     20 |
+|     7934 | MILLER | CLERK     | 7782 | 1981-03-12 | 1300 | NULL |     10 | 
++----------+--------+-----------+------+------------+------+------+--------+
 表2：其中empno字段为主键
 ```
         empno, ename,    job,    MGR,   Hiredate,    sal,   comm, deptno
@@ -103,27 +158,104 @@ values(7369, "SMITH", "CLERK", 7902, "1981-03-12", 800.00, NULL, 20),
 ```SQL
 insert into t_dept2(empno, ename,job,MGR,Hiredate,sal,comm, deptno)
  values(17061519, "LiuHao", "student", 7782, "1998-09-10", NULL, NULL, 10);
+ +----------+--------+-----------+------+------------+------+------+--------+
+| empno    | ename  | job       | mgr  | hiredate   | sal  | comm | deptno |
++----------+--------+-----------+------+------------+------+------+--------+
+|     7369 | SMITH  | CLERK     | 7902 | 1981-03-12 |  800 | NULL |     20 |
+|     7499 | ALLEN  | SALESMAN  | 7698 | 1982-03-12 | 1600 |  300 |     30 |
+|     7521 | WARD   | SALESMAN  | 7698 | 1838-03-12 | 1250 |  500 |     30 |
+|     7566 | JONES  | MANAGER   | 7839 | 1981-03-12 | 2975 | NULL |     20 |
+|     7654 | MARTIN | SALESMAN  | 7698 | 1981-01-12 | 1250 | 1400 |     30 |
+|     7698 | BLAKE  | MANAGER   | 7839 | 1985-03-12 | 2450 | NULL |     10 |
+|     7788 | SCOTT  | ANALYST   | 7566 | 1981-03-12 | 3000 | NULL |     20 |
+|     7839 | KING   | PRESIDENT | NULL | 1981-03-12 | 5000 | NULL |     10 |
+|     7844 | TURNER | SALESMAN  | 7689 | 1981-03-12 | 1500 |    0 |     30 |
+|     7878 | ADAMS  | CLERK     | 7788 | 1981-03-12 | 1100 | NULL |     20 |
+|     7900 | JAMES  | CLERK     | 7698 | 1981-03-12 |  950 | NULL |     30 |
+|     7902 | FORD   | ANALYST   | 7566 | 1981-03-12 | 3000 | NULL |     20 |
+|     7934 | MILLER | CLERK     | 7782 | 1981-03-12 | 1300 | NULL |     10 |
+| 17061519 | LiuHao | student   | 7782 | 1998-09-10 | NULL | NULL |     10 |
++----------+--------+-----------+------+------------+------+------+--------+
  ```
 3.2 表中入职时间（Hiredate字段）最短的人。
 ```SQL
 mysql> select*from t_dept2 where hiredate=(select max(hiredate)from t_dept2);
++----------+--------+---------+------+------------+------+------+--------+
+| empno    | ename  | job     | mgr  | hiredate   | sal  | comm | deptno |
++----------+--------+---------+------+------------+------+------+--------+
+| 17061519 | LiuHao | student | 7782 | 1998-09-10 | NULL | NULL |     10 |
++----------+--------+---------+------+------------+------+------+--------+
 ```
 3.3 有几种职位（job字段）？在关系代数中，本操作是什么运算？
+```SQL
+select count(distinct(job)) from t_dept2;
++----------------------+
+| count(distinct(job)) |
++----------------------+
+|                    6 |
++----------------------+
+```
 
 3.4 将 MILLER 的 comm 增加 100； 然后，找到 comm 比 MILLER 低的人；
 
 3.5 计算每个人的收入(ename, sal + comm)；计算总共有多少人；计算所有人的平均收入。 提示：计算时 NULL 要当做 0 处理； 
-
+```SQL
+create view tu1 as
+select ename,sal+comm from t_dept2;
+select*from tu1；
+```
 3.6 显示每个人的下属, 没有下属的显示 NULL。本操作使用关系代数中哪几种运算？
-
+```SQL
+select*from(t_dept2 t1 inner join t_dept2 t2 on t1. mgr=t2.empno)
+inner join t_dept2 t3 on t2. mgr=t3.empno;
+```
+连接、选择
 3.7 建立一个视图：每个人的empno, ename, job 和 loc。简述为什么要建立本视图。
+
 
 3.8 为表2增加一个约束：deptno字段需要在表1中存在；这称做什么完整性？
 
 3.9 为表2增加一个索引：ename 字段。简述为什么要在 ename 字段建立索引
-
+```SQL
+create index index_ename
+on t_dept2(ename);
+show create table t_dept2;
++---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table   | Create Table                                                                                                                                                                                                                                                                                                                                                                              |
++---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| t_dept2 | CREATE TABLE `t_dept2` (
+  `empno` int(11) NOT NULL,
+  `ename` varchar(20) DEFAULT NULL,
+  `job` varchar(20) DEFAULT NULL,
+  `mgr` int(11) DEFAULT NULL,
+  `hiredate` varchar(40) DEFAULT NULL,
+  `sal` int(11) DEFAULT NULL,
+  `comm` int(11) DEFAULT NULL,
+  `deptno` int(11) DEFAULT NULL,
+  PRIMARY KEY (`empno`),
+  KEY `index_ename` (`ename`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
++---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+```
+为了提高从表中检索数据的速度
 3.10 将表2的 sal 字段改名为 salary
-
+```SQL
+alter table t_dept2
+change sal salalr int;
+desc t_dept2;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| empno    | int(11)     | NO   | PRI | NULL    |       |
+| ename    | varchar(20) | YES  | MUL | NULL    |       |
+| job      | varchar(20) | YES  |     | NULL    |       |
+| mgr      | int(11)     | YES  |     | NULL    |       |
+| hiredate | varchar(40) | YES  |     | NULL    |       |
+| salalr   | int(11)     | YES  |     | NULL    |       |
+| comm     | int(11)     | YES  |     | NULL    |       |
+| deptno   | int(11)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+```
 3.11 撰写一个函数 get_deptno_from_empno，输入 empno，输出对应的 deptno。 简述函数和存储过程有什么不同。
 
 4 建立一个新用户，账号为自己的姓名拼音，密码为自己的学号；
@@ -131,6 +263,8 @@ mysql> select*from t_dept2 where hiredate=(select max(hiredate)from t_dept2);
 4.1 将表1的SELECT, INSERT, UPDATE(ename)权限赋给该账号。
 
 4.2 显示该账号权限
+```SQL
+
 
 4.3 `with grant option` 是什么意思。
 
