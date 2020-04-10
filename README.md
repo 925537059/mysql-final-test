@@ -218,7 +218,7 @@ select count(distinct(job)) from t_dept2;
 |     7900 | JAMES  | CLERK     | 7698 | 1981-03-12 |  950 | NULL |     30 |
 |     7902 | FORD   | ANALYST   | 7566 | 1981-03-12 | 3000 | NULL |     20 |
 |     7934 | MILLER | CLERK     | 7782 | 1981-03-12 | 1300 |  100 |     10 |
-| 17061512 | jinxin | student   | 7782 | 1999-05-05 | NULL | NULL |     10 |
+| 17061519 | liuhao | student   | 7782 | 1998-09-10 | NULL | NULL |     10 |
 +----------+--------+-----------+------+------------+------+------+--------+
 ```
 ```SQL
@@ -252,7 +252,7 @@ select*from tu1；
 | JAMES  |     NULL |
 | FORD   |     NULL |
 | MILLER |     1400 |
-| jinxin |     NULL |
+| liuhao |     NULL |
 +--------+----------+
 ```
 3.6 显示每个人的下属, 没有下属的显示 NULL。本操作使用关系代数中哪几种运算？
