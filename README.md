@@ -459,6 +459,23 @@ ACID，指数据库事务正确执行的四个基本要素的缩写。包含：�
 8.1 编写一个事务，“将 MILLER 的 comm 增加 100，如果增加后的 comm 大于 1000 则回滚”；
 
 8.2 如何查看 MySQL 当前的隔离级别？
++ 1.选择数据库,查看当前事务隔离界别
+```SQL
+select @@tx_isolation;
+```
++ 2.开启事务,回滚事务
++ 3.事务级别中脏读,幻读 
++ 4.MySQL事务autocommit设置,每次sql必须用commit提交生效.
++ MySQL默认操作模式就是autocommit自动提交模式。这就表示除非显式地开始一个事务，否则每个查询都被当做一个单独的事务自动执行。我们可以通过设置autocommit的值改变是否是自动提交autocommit模式。
++ 通过以下命令可以查看当前autocommit模式
+```SQL
+show variables like 'autocommit';
+```
++ 关闭自动提交,每次sql必须通过commit命令提交.
+```SQL
+set autocommit = 0;
+```
+
 
 8.3 如果隔离级别为 READ-UNCOMMITED, 完成 “MILLER 的 comm 增加 100” 事务操作完成后，可能读到的结果有哪些，原因是什么？
 
