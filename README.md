@@ -2,9 +2,9 @@
 
 2019-2020 mysql final test
 
-姓名：
+姓名：刘浩
 
-学号：
+学号：17061519
 
 说明1：考试为开卷，可以上网，自觉不要相互电话和QQ；
 
@@ -16,14 +16,33 @@
 
 
 1 打印当前时间（例如 2020-04-07 13:41:42），写出SQL语句和结果
+```SQL
+select current_timestamp,
+current_timestamp();
+```
 
 2 组合打印自己的姓名和学号
 
 (例如 张三+123456 或者 zhangsan+123456 显示需包含加号)，写出SQL语句和结果
+```SQL
+select concat("刘浩+",17061519);
+```
 
 3 建立如下表1和表2，写出建表语句和插入语句。
-
-表1：其中deptno为主键
+```SQL
+create table t_dept1(
+deptno int primary key,
+dname varchar(20),
+loc varchar(20)
+);
+insert into t_dept1(deptno,dname,loc)
+values(10, "ACCOUNTING", "NEW YORK"),
+(20, "RESEARCH", "DALLAS"),
+(30, "SALES", "CHICAGO"),
+(40, "OPERATIONS", "BOSTON");
+select*from t_dept1;
+```
+表1：其中deptno为主键,
 ```
 deptno, dname,    loc
 (10, "ACCOUNTING", "NEW YORK"),
@@ -31,7 +50,32 @@ deptno, dname,    loc
 (30, "SALES", "CHICAGO"),
 (40, "OPERATIONS", "BOSTON")
 ```
-
+```SQL
+create table t_dept2(
+empno int primary key,
+ename varchar(20),
+job varchar(20),
+mgr int,
+hiredate varchar(40),
+sal int,
+comm int,
+deptno int
+);
+insert into t_dept2(empno, ename,job,MGR,Hiredate,sal,comm, deptno)
+values(7369, "SMITH", "CLERK", 7902, "1981-03-12", 800.00, NULL, 20),
+(7499, "ALLEN", "SALESMAN", 7698, "1982-03-12", 1600, 300, 30),
+(7521, "WARD", "SALESMAN", 7698, "1838-03-12", 1250, 500, 30),
+(7566, "JONES", "MANAGER", 7839, "1981-03-12", 2975, NULL, 20),
+(7654, "MARTIN", "SALESMAN", 7698, "1981-01-12", 1250, 1400, 30),
+(7698, "BLAKE", "MANAGER", 7839, "1985-03-12", 2450, NULL, 10),
+(7788, "SCOTT", "ANALYST", 7566, "1981-03-12", 3000, NULL, 20),
+(7839, "KING", "PRESIDENT", NULL, "1981-03-12", 5000, NULL, 10),
+(7844, "TURNER", "SALESMAN", 7689, "1981-03-12", 1500, 0, 30),
+(7878, "ADAMS", "CLERK", 7788, "1981-03-12", 1100, NULL,20),
+(7900, "JAMES", "CLERK", 7698,"1981-03-12",  950, NULL, 30),
+(7902, "FORD", "ANALYST", 7566, "1981-03-12", 3000, NULL, 20),
+(7934, "MILLER", "CLERK", 7782, "1981-03-12", 1300, NULL, 10)
+;
 表2：其中empno字段为主键
 ```
         empno, ename,    job,    MGR,   Hiredate,    sal,   comm, deptno
@@ -48,6 +92,7 @@ deptno, dname,    loc
 	(7900, "JAMES", "CLERK", 7698,"1981-03-12",  950, NULL, 30),
 	(7902, "FORD", "ANALYST", 7566, "1981-03-12", 3000, NULL, 20),
 	(7934, "MILLER", "CLERK", 7782, "1981-03-12", 1300, NULL, 10)
+	
 ```
 
 3.1 表2 中再插入一条记录：
@@ -55,9 +100,14 @@ deptno, dname,    loc
 `(你的学号，你的姓名或者拼音， “CLERK”, 7782, 你的生日,  NULL, NULL, 10)`
  
 例如：`(12345,  "Zhangsan", "sTUDENT", 7782, "2000-03-12", NULL, NULL, 10)`
-
+```SQL
+insert into t_dept2(empno, ename,job,MGR,Hiredate,sal,comm, deptno)
+ values(17061519, "LiuHao", "student", 7782, "1998-09-10", NULL, NULL, 10);
+ ```
 3.2 表中入职时间（Hiredate字段）最短的人。
-
+```SQL
+mysql> select*from t_dept2 where hiredate=(select max(hiredate)from t_dept2);
+```
 3.3 有几种职位（job字段）？在关系代数中，本操作是什么运算？
 
 3.4 将 MILLER 的 comm 增加 100； 然后，找到 comm 比 MILLER 低的人；
@@ -89,9 +139,16 @@ deptno, dname,    loc
 6 画出表 1 和表 2 所对应的 E-R 图
 
 7 什么是外模式，什么是内模式。为什么要分成这几层？
+外模式：外模式又称子模式，对应于用户级。它是某个或某几个e79fa5e98193e58685e5aeb931333239306661用户所看到的数据库的数据视图，是与某一应用有关的数据的逻辑表示。外模式是从模式导出的一个子集，包含模式中允许特定用户使用的那部分数据。用户可以通过外模式描述语言来描述、定义对应于用户的数据记录(外模式)，也可以利用数据操纵语言(Data Manipulation Lang uage，DML)对这些数据记录进行。外模式反映了数据库的用户观。 
+内模式：内模式又称存储模式，对应于物理级，它是数据库中全体数据的内部表示或底层描述，是数据库最低一级的逻辑描述，它描述了数据在存储介质上的存储方式翱物理结构，对应着实际存储在外存储介质上的数据库。内模式由内模式描述语言来描述、定义，它是数据库的存储观。 
+在一个数据库系统中，只有唯一的数据库， 因而作为定义 、描述数据库存储结构的内模式和定义、描述数据库逻辑结构的模式，也是惟一的，但建立在数据库系统之上的应用则是非常广泛、多样的，所以对应的外模式不是惟一的，也不可能是惟一的。 
 
 8 什么是ACID？
-
+ACID，指数据库事务正确执行的四个基本要素的缩写。包含：原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）、持久性（Durability）。一个支持事务（Transaction）的数据库，必须要具有这四种特性，否则在事务过程（Transaction processing）当中无法保证数据的正确性，交易过程极可能达不到交易方的要求。
+原子性：整个事务中的所有操作，要么全部完成，要么全部不完成，不可能停滞在中间某个环节。事务在执行过程中发生错误，会被回滚（Rollback）到事务开始前的状态，就像这个事务从来没有执行过一样。
+一致性：一个事务可以封装状态改变（除非它是一个只读的）。事务必须始终保持系统处于一致的状态，不管在任何给定的时间并发事务有多少。
+隔离性：隔离状态执行事务，使它们好像是系统在给定时间内执行的唯一操作。如果有两个事务，运行在相同的时间内，执行相同的功能，事务的隔离性将确保每一事务在系统中认为只有该事务在使用系统。这种属性有时称为串行化，为了防止事务操作间的混淆，必须串行化或序列化请求，使得在同一时间仅有一个请求用于同一数据。
+持久性：在事务完成以后，该事务对数据库所作的更改便持久的保存在数据库之中，并不会被回滚。
 8.1 编写一个事务，“将 MILLER 的 comm 增加 100，如果增加后的 comm 大于 1000 则回滚”；
 
 8.2 如何查看 MySQL 当前的隔离级别？
@@ -99,3 +156,9 @@ deptno, dname,    loc
 8.3 如果隔离级别为 READ-UNCOMMITED, 完成 “MILLER 的 comm 增加 100” 事务操作完成后，可能读到的结果有哪些，原因是什么？
 
 9 有哪些场景不适合用关系型数据库？为什么？
+1、图片、文件、二进制数据
+对数据库的读/写的速度永远都赶不上文件系统处理的速度，数据库备份变的巨大，越来越耗时间，对文件的访问需要穿越你的应用层和数据库层
+2、短生命期数据
+使用情况统计数据，测量数据，GPS定位数据，session数据，任何只是短时间内对你有用，或经常变化的数据。如果你发现自己正在使用定时任务从某个表里删除有效期只有一小时，一天或数周的数据，那说明你没有找对正确的做事情的方法。使用redis， statsd/graphite， Riak，它们都是干这种事情更合适的工具。这建议也适用于对于收集那些短生命期的数据。
+3、日志文件
+也许你的日志记录做的很保守，每次web请求只产生一条日志。对于整个网站的每个事件来说，这仍然会产生大量的数据库插入操作，争夺你用户需要的数据库资源。如果你的日志级别设置为verbose或debug，那等着看你的数据库着火吧。
